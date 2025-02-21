@@ -14,7 +14,7 @@ const MenuLink = ({ item }: { item: MenuLinkProps }) => {
     const pathname = usePathname()
 
     return (
-        <Link href={item.path} className={`p-5 flex items-center gap-2.5 my-[5px] rounded-[10px] hover:bg-[var(--active)] ${pathname === item.path ? 'bg-[var(--active)]' : ''}`}>
+        <Link href={item.path} className={`p-5 flex items-center gap-2.5 my-[5px] rounded-[10px] hover:bg-[var(--bgActive)] ${pathname === item.path ? 'bg-[var(--bgActive)]' : ''}`}>
             {item.icon}
             {item.title}
         </Link>
