@@ -9,7 +9,7 @@ const ProductsPage = () => {
         <div className="bg-[var(--bgSoft)] p-5 mt-5 rounded-[10px]">
             <div className="flex justify-between items-center">
                 <Search placeholder="Search users..." />
-                <Link href="/dashboard/users/add">
+                <Link href="/dashboard/products/add">
                     <button className="p-2.5 bg-[var(--bgPurple)] text-[var(--text)] rounded-[5px] border-none cursor-pointer">Add New</button>
                 </Link>
             </div>
@@ -38,7 +38,7 @@ const ProductsPage = () => {
                         <td>40</td>
                         <td>
                             <div className="flex gap-2.5">
-                                <Link href={`/dashboard/users/1`}>
+                                <Link href={`/dashboard/products/1`}>
                                     <button className="py-[5px] px-2.5 rounded-[5px] border-none cursor-pointer text-[var(--text)] bg-green-500">
                                         View
                                     </button>
