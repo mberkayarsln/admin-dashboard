@@ -5,9 +5,10 @@
 :root {
     --bg: #151c2c;
     --bgSoft: #182237;
+    --bgActive: #2e374a;
+    --bgPurple: #5d57c9;
     --text: white;
     --textSoft: #b7bac1;
-    --bgActive: #2e374a;
 }
 
 * {
