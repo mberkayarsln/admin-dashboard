@@ -2,6 +2,7 @@ import Search from "@/components/dashboard/Search"
 import Link from "next/link"
 import Image from "next/image"
 import Pagination from "@/components/dashboard/Pagination"
+import Description from "@/components/dashboard/Products/Description"
 
 const ProductsPage = () => {
     return (
@@ -31,7 +32,7 @@ const ProductsPage = () => {
                                 iPhone
                             </div>
                         </td>
-                        <td className="overflow-hidden text-ellipsis max-w-64">mobilephonemobilephonemobilephonemobilephonemobilephonemobilephonemobilephone</td>
+                        <td><Description /></td>
                         <td>$999.99</td>
                         <td>2021-08-29</td>
                         <td>40</td>
