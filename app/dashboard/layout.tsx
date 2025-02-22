@@ -1,3 +1,4 @@
+import Footer from "@/components/dashboard/Footer"
 import Navbar from "@/components/dashboard/Navbar"
 import Sidebar from "@/components/dashboard/Sidebar/Sidebar"
 
@@ -10,6 +11,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <div className="flex-[4] p-5">
                 <Navbar />
                 {children}
+                <Footer />
             </div>
         </div>
     )
