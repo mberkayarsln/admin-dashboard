@@ -4,24 +4,12 @@ import Search from "@/components/dashboard/Search"
 import Image from "next/image"
 import Link from "next/link"
 
-interface User {
-    _id: string;
-    username: string;
-    email: string;
-    password: string;
-    img?: string;
-    isAdmin?: boolean;
-    isActive?: boolean;
-    phone?: string;
-    address?: string;
-    createdAt?: Date;
-    updatedAt?: Date;
-}
+const UsersPage = async ({ searchParams }: { searchParams: { search: string, page: string } }) => {
 
+    const query = await searchParams.search;
+    const page = await searchParams.page;
 
-const UsersPage = async () => {
-
-    const users: User[] = await fetchUsers();
+    const { users, count }: { users: User[]; count: number; } = await fetchUsers(query, page);
 
     return (
         <div className="bg-[var(--bgSoft)] p-5 mt-5 rounded-[10px]">
@@ -47,7 +35,7 @@ const UsersPage = async () => {
                         <tr className="[&>*]:p-2.5" key={user._id}>
                             <td>
                                 <div className="flex items-center gap-2.5">
-                                    <Image className="object-cover rounded-full" src={user.img || "/noavatar.png"} alt="" width={40} height={40} />
+                                    <Image className="object-cover rounded-full aspect-square" src={user.img || "/noavatar.png"} alt="" width={40} height={40} />
                                     {user.username}
                                 </div>
                             </td>
@@ -71,7 +59,7 @@ const UsersPage = async () => {
                     ))}
                 </tbody>
             </table>
-            <Pagination />
+            <Pagination count={count}/>
         </div>
     )
 }
