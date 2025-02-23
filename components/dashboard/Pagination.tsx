@@ -12,9 +12,6 @@ const Pagination = ({ count }: { count: number }) => {
 
     const page = parseInt(searchParams.get("page") || "1");
 
-    console.log(count);
-    console.log(parseInt(ITEM_PER_PAGE) * page)
-
     const handlePagination = (type: string) => {
 
         let newPage = type === "prev" ? page - 1 : page + 1

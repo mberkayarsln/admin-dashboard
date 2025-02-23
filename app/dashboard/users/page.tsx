@@ -1,3 +1,4 @@
+import { deleteUser } from "@/app/lib/actions"
 import { fetchUsers } from "@/app/lib/data"
 import Pagination from "@/components/dashboard/Pagination"
 import Search from "@/components/dashboard/Search"
@@ -50,16 +51,19 @@ const UsersPage = async ({ searchParams }: { searchParams: { search: string, pag
                                             View
                                         </button>
                                     </Link>
-                                    <button className="py-[5px] px-2.5 rounded-[5px] border-none cursor-pointer text-[var(--text)] bg-red-500">
-                                        Delete
-                                    </button>
+                                    <form action={deleteUser}>
+                                        <input type="hidden" name="id" value={user._id.toString()} />
+                                        <button className="py-[5px] px-2.5 rounded-[5px] border-none cursor-pointer text-[var(--text)] bg-red-500">
+                                            Delete
+                                        </button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-            <Pagination count={count}/>
+            <Pagination count={count} />
         </div>
     )
 }
