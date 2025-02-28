@@ -137,16 +137,16 @@ export const deleteProduct = async (formData: FormData) => {
     revalidatePath("/dashboard/products");
 }
 
-export const authenticate = async (formData: FormData) => {
+export const authenticate = async (_: any, formData: FormData) => {
     try {
         await signIn('credentials', formData);
     } catch (error) {
         if (error instanceof AuthError) {
             switch (error.type) {
                 case 'CredentialsSignin':
-                    throw new Error('Invalid credentials.');
+                    return 'Invalid credentials.';
                 default:
-                    throw new Error('Something went wrong.');
+                    return 'Something went wrong.';
             }
         }
         throw error;
