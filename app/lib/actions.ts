@@ -1,10 +1,22 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { User } from "./models";
+import { Product, User } from "./models";
 import { connectToDb } from "./utils";
 import { redirect } from "next/navigation";
 import bcrypt from "bcrypt";
+
+export const fetchUser = async (id: string) => {
+
+    try {
+        connectToDb();
+        return User.findById(id);
+    } catch (error) {
+        console.error(error);
+        throw new Error("Error fetching user!");
+    }
+
+}
 
 export const addUser = async (formData: FormData) => {
     const { username, email, password, phone, isAdmin, isActive, address } = Object.fromEntries(formData);
@@ -46,4 +58,81 @@ export const deleteUser = async (formData: FormData) => {
     }
 
     revalidatePath("/dashboard/users");
+}
+
+export const fetchProduct = async (id: string) => {
+
+    try {
+        connectToDb();
+        return Product.findById(id);
+    } catch (error) {
+        console.error(error);
+        throw new Error("Error fetching product!");
+    }
+
+}
+
+export const addProduct = async (formData: FormData) => {
+    const { title, cat, price, stock, color, size, desc, category } = Object.fromEntries(formData);
+
+    try {
+        connectToDb();
+
+        const newProduct = new Product({
+            title,
+            cat,
+            price,
+            stock,
+            color,
+            size,
+            desc,
+            category
+        });
+        await newProduct.save();
+    } catch (error) {
+        console.error(error);
+        throw new Error("Error adding product!");
+    }
+
+    revalidatePath("/dashboard/products");
+    redirect("/dashboard/products");
+}
+
+export const updateProduct = async (formData: FormData) => {
+
+    const { id, title, cat, price, stock, color, size, desc, category } = Object.fromEntries(formData);
+
+    try {
+        connectToDb();
+        await Product.findByIdAndUpdate(id, {
+            title,
+            cat,
+            price,
+            stock,
+            color,
+            size,
+            desc,
+            category
+        });
+    } catch (error) {
+        console.error(error);
+        throw new Error("Error updating product!");
+    }
+
+    revalidatePath(`/dashboard/products/${id}`);
+}
+
+export const deleteProduct = async (formData: FormData) => {
+
+    const { id } = Object.fromEntries(formData);
+
+    try {
+        connectToDb();
+        await Product.findByIdAndDelete(id);
+    } catch (error) {
+        console.error(error);
+        throw new Error("Error deleting product!");
+    }
+
+    revalidatePath("/dashboard/products");
 }

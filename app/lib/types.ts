@@ -23,4 +23,5 @@ interface Product {
     size?: string;
     createdAt?: Date;
     updatedAt?: Date;
+    category: string;
 }

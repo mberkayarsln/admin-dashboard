@@ -1,7 +1,9 @@
+import { addProduct } from "@/app/lib/actions";
+
 const AddProductPage = () => {
     return (
         <div className="bg-[var(--bgSoft)] p-5 rounded-lg mt-5">
-            <form className="flex flex-wrap justify-between">
+            <form action={addProduct} className="flex flex-wrap justify-between">
                 <input
                     type="text"
                     placeholder="Title"
@@ -10,8 +12,8 @@ const AddProductPage = () => {
                     className="p-4 bg-[var(--bg)] text-[var(--text)] border-2 border-[var(--inputBorder)] rounded mb-7 w-[45%] outline-none"
                 />
                 <select
-                    name="cat"
-                    id="cat"
+                    name="category"
+                    id="category"
                     className="p-4 bg-[var(--bg)] text-[var(--text)] border-2 border-[var(--inputBorder)] rounded mb-7 w-[45%] outline-none"
                 >
                     <option value="general">Choose a Category</option>
