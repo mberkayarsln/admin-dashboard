@@ -1,4 +1,5 @@
-import { fetchProduct, updateProduct } from "@/app/lib/actions";
+import { updateProduct } from "@/app/lib/actions";
+import { fetchProduct } from "@/app/lib/data";
 import Image from "next/image";
 
 const SingleProductPage = async ({ params }: { params: { id: string } }) => {

@@ -1,10 +1,11 @@
-import { fetchUser, updateUser } from "@/app/lib/actions";
+import { updateUser } from "@/app/lib/actions";
+import { fetchUserById } from "@/app/lib/data";
 import Image from "next/image";
 
 const SingleUserPage = async ({ params }: { params: { id: string } }) => {
     const { id } = await params;
 
-    const user: User = await fetchUser(id);
+    const user: User = await fetchUserById(id);
 
     return (
         <div className="flex gap-4 mt-5">

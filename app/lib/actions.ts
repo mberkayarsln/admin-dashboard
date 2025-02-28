@@ -5,18 +5,8 @@ import { Product, User } from "./models";
 import { connectToDb } from "./utils";
 import { redirect } from "next/navigation";
 import bcrypt from "bcrypt";
-
-export const fetchUser = async (id: string) => {
-
-    try {
-        connectToDb();
-        return User.findById(id);
-    } catch (error) {
-        console.error(error);
-        throw new Error("Error fetching user!");
-    }
-
-}
+import { signIn } from "@/auth";
+import { AuthError } from "next-auth";
 
 export const addUser = async (formData: FormData) => {
     const { username, email, password, phone, isAdmin, isActive, address } = Object.fromEntries(formData);
@@ -82,18 +72,6 @@ export const deleteUser = async (formData: FormData) => {
     revalidatePath("/dashboard/users");
 }
 
-export const fetchProduct = async (id: string) => {
-
-    try {
-        connectToDb();
-        return Product.findById(id);
-    } catch (error) {
-        console.error(error);
-        throw new Error("Error fetching product!");
-    }
-
-}
-
 export const addProduct = async (formData: FormData) => {
     const { title, cat, price, stock, color, size, desc, category } = Object.fromEntries(formData);
 
@@ -157,4 +135,20 @@ export const deleteProduct = async (formData: FormData) => {
     }
 
     revalidatePath("/dashboard/products");
+}
+
+export const authenticate = async (formData: FormData) => {
+    try {
+        await signIn('credentials', formData);
+    } catch (error) {
+        if (error instanceof AuthError) {
+            switch (error.type) {
+                case 'CredentialsSignin':
+                    throw new Error('Invalid credentials.');
+                default:
+                    throw new Error('Something went wrong.');
+            }
+        }
+        throw error;
+    }
 }

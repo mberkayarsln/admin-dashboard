@@ -16,6 +16,28 @@ export const fetchUsers = async (query: string, page: string) => {
     }
 }
 
+export const fetchUserById = async (id: string) => {
+
+    try {
+        connectToDb();
+        return await User.findById(id);
+    } catch (error) {
+        console.error(error);
+        throw new Error("Error fetching user!");
+    }
+
+}
+
+export const fetchUserByEmail = async (email: string) => {
+    try {
+        connectToDb();
+        return await User.findOne({ email });
+    } catch (error) {
+        console.error(error);
+        throw new Error("Error fetching user!");
+    }
+}
+
 export const fetchProducts = async (query: string, page: string) => {
     try {
         connectToDb();
@@ -27,4 +49,16 @@ export const fetchProducts = async (query: string, page: string) => {
         console.error(error);
         throw new Error("Failed to fetch products!");
     }
+}
+
+export const fetchProduct = async (id: string) => {
+
+    try {
+        connectToDb();
+        return Product.findById(id);
+    } catch (error) {
+        console.error(error);
+        throw new Error("Error fetching product!");
+    }
+
 }
