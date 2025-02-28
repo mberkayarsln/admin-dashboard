@@ -12,6 +12,7 @@ import {
 } from "react-icons/md";
 import MenuLink from "./MenuLink";
 import Image from "next/image";
+import { signOut } from "@/auth";
 
 const menuItems = [
   {
@@ -103,10 +104,15 @@ const Sidebar = () => {
           </li>
         ))}
       </ul>
-      <button className="p-5 flex items-center gap-2.5 my-[5px] rounded-[10px] hover:bg-[var(--bgActive)] w-full">
-        <MdLogout />
-        Logout
-      </button>
+      <form action={async () => {
+        "use server";
+        await signOut();
+      }}>
+        <button className="p-5 flex items-center gap-2.5 my-[5px] rounded-[10px] hover:bg-[var(--bgActive)] w-full">
+          <MdLogout />
+          Logout
+        </button>
+      </form>
     </div>
   )
 }
