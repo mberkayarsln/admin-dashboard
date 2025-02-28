@@ -46,6 +46,28 @@ export const addUser = async (formData: FormData) => {
     redirect("/dashboard/users");
 }
 
+export const updateUser = async (formData: FormData) => {
+    const { id, username, email, phone, isAdmin, isActive, address } = Object.fromEntries(formData);
+
+    try {
+        connectToDb();
+        await User.findByIdAndUpdate(id, {
+            username,
+            email,
+            phone,
+            isAdmin,
+            isActive,
+            address,
+        })
+    }
+    catch (error) {
+        console.error(error);
+        throw new Error("Error updating user!");
+    }
+
+    revalidatePath(`/dashboard/users/${id}`);
+}
+
 export const deleteUser = async (formData: FormData) => {
     const { id } = Object.fromEntries(formData)
 
