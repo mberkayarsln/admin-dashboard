@@ -12,7 +12,7 @@ import {
 } from "react-icons/md";
 import MenuLink from "./MenuLink";
 import Image from "next/image";
-import { signOut } from "@/auth";
+import { auth, signOut } from "@/auth";
 
 const menuItems = [
   {
@@ -78,15 +78,17 @@ const menuItems = [
 ];
 
 
-const Sidebar = () => {
+const Sidebar = async () => {
+
+  const session = await auth();
+  const email = session?.user?.email;
   return (
     <div className="sticky top-10">
 
       <div className="flex items-center gap-5 mb-5">
         <Image className="rounded-full object-cover" src="/noavatar.png" alt="No avatar" width={50} height={50} />
         <div className="flex flex-col">
-          <span className="font-medium">Berkay Arslan</span>
-          <span className="text-xs text-[var(--textSoft)]">Administrator</span>
+          <span className="font-medium">{email}</span>
         </div>
       </div>
 
